@@ -1,0 +1,11 @@
+.app {
+    &__nav {
+        display: flex;
+
+        &-list {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    }   
+}
