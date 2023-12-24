@@ -1,0 +1,18 @@
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1 class="login-form__title">Please, enter your login and password</h1>
+
+    <label class="login-form__label" for="login">Login</label>
+    <input class="login-form__input" type="text" formControlName="login">
+
+    <label class="login-form__label" for="password">Password</label>
+    <input class="login-form__input" type="password" formControlName="password">
+
+    <app-text-input
+        [label]="'Текст'"
+        [formControlName]="'текст'"
+        [id]="'Текст'"
+        [placeholder]="'Текст'"
+    />
+
+    <button class="button login-form__button" type="submit">Login</button>
+</form>

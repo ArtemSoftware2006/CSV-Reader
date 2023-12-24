@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('../node_modules/normalize.css/normalize.css');
+
 
 a {
     margin: 0;
@@ -10,4 +12,6 @@ li {
     list-style: none;
 }
 
-@import url('../node_modules/normalize.css/normalize.css');
+.button {
+    border : none;
+}

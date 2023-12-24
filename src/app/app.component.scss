@@ -1,11 +1,56 @@
+@import '../shared/variables.scss';
+
 .app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
     &__nav {
+        padding: 5px;
         display: flex;
+        background-color: $color-secondary;
+        border-bottom: 2px solid $color-primary;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
 
         &-list {
             display: flex;
+            flex-grow: 1;
             align-items: center;
             gap: 20px;
         }
-    }   
+
+        &-item {
+            font-size: $nav-text;
+            color: $color-text-nav;
+            font-weight: 500;
+            border-radius: 4px;
+            padding: 6px 12px;
+            background-color: $color-primary;
+
+            &:hover {
+                background-color: $color-nav-hover;
+            }
+        }
+    };
+
+    &__content{
+        font-size: $primary-text;
+        flex-grow: 1;
+    }
+
+    &__footer {
+        font-size: $primary-text;
+        border-top: 2px solid $color-primary;
+        background-color: $color-secondary;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 8px;
+    }
+}
+
+.nav {
+    &_main {
+        margin-left: 30px;
+    }
 }
