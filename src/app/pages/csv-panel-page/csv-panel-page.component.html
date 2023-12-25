@@ -1,1 +1,12 @@
-<p>csv-panel-page works!</p>
+<nav class="csv-panel__nav">
+    <span class="csv-panel__title">CSV Panel</span>
+
+    <div class="csv-panel__nav-item ">
+        <label for="file">Загрузить файл</label>
+        <input class="csv-panel__file" id="file" type="file" (change)="onFileSelected($event)"/>
+    </div>
+</nav>
+
+<main class="csv-panel__content">
+    <app-csv-table [data]="data"></app-csv-table>
+</main>

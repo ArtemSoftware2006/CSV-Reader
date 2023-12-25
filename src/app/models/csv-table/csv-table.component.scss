@@ -1,0 +1,10 @@
+.csv-table {
+    &__title {
+        margin: 10px;
+    }
+
+    &__content {
+        max-height: 100%;
+        overflow: auto;
+    }
+}

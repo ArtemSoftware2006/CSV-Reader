@@ -3,6 +3,7 @@
 .app {
     display: flex;
     flex-direction: column;
+    max-height: 100vh;
     height: 100vh;
 
     &__nav {
@@ -37,6 +38,8 @@
     &__content{
         font-size: $primary-text;
         flex-grow: 1;
+        max-height: 100%;
+        overflow: hidden;
     }
 
     &__footer {
