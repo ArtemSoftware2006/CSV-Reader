@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextInputComponent } from '../../input/text-input/text-input.component';
 
 @Component({
@@ -15,12 +15,14 @@ export class LoginFormComponent {
 
   constructor() {
     this.loginForm = new FormGroup({
-      login : new FormControl(''),
-      password : new FormControl(''),
-      text : new FormControl('')
+      login : new FormControl('', [
+        Validators.required,
+      ]),
+      password : new FormControl('',[
+        Validators.required,
+        Validators.minLength(4)
+      ]),
     });
-
-    this.loginForm.get('login') as FormControl;
   }
 
   onSubmit() {
