@@ -1,0 +1,38 @@
+@import '../../../../shared/variables.scss';
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+
+    &__title {
+        max-width: 400px;
+        text-align: center;
+    }
+
+    &__label {
+        padding: 4px;
+
+    }
+
+    &__input {
+        padding: 4px;
+        border-radius: 4px;
+        margin-bottom: 5px;
+    }
+
+    &__error {
+        color: red;
+    }
+
+    &__button {
+        padding: 6px;
+        border-radius: 4px;
+        background-color: $color-primary;
+        margin-top: 10px;
+
+        &:hover {
+            background-color: $color-nav-hover;
+        }
+    }
+}

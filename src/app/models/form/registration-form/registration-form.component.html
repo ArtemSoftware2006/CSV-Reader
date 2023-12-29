@@ -1,0 +1,23 @@
+<form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <h1 class="registration-form__title">Please, enter your login and password</h1>
+
+    <label class="registration-form__label" for="login">login</label>
+    <input class="registration-form__input" type="text" formControlName="login">
+    @if(registrationForm.controls["login"].invalid && registrationForm.controls["login"].touched){
+        <div class="registration-form__error">Не указан логин</div>
+    }
+
+    <label class="registration-form__label" for="password">Password</label>
+    <input class="registration-form__input" type="password" formControlName="password">
+    @if(registrationForm.controls["password"].invalid && registrationForm.controls["password"].touched){
+        <div class="registration-form__error">Не задан пароль или пароль меньше 4 символов</div>
+    }
+
+    <label class="registration-form__label" for="passwordConfirm">Password Confirm</label>
+    <input class="registration-form__input" type="password" formControlName="passwordConfirm">
+    @if(registrationForm.controls["passwordConfirm"].invalid && registrationForm.controls["passwordConfirm"].touched){
+        <div class="registration-form__error">Пароли не совпадают</div>
+    }
+
+    <button class="button registration-form__button" type="submit">Registration</button>
+</form>
