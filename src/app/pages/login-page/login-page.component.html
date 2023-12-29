@@ -1,5 +1,14 @@
 
 
 <div class="login-page__wrapper">
-    <app-login-form></app-login-form>
+
+    <div *ngIf="isLoginMode">
+        <app-login-form></app-login-form>
+    </div>
+    <div *ngIf="!isLoginMode">
+        <app-registration-form></app-registration-form>
+    </div>
+
+    <button class="button login-page__button" (click)="changeMode()">{{changeModeText}}</button>
+
 </div>
