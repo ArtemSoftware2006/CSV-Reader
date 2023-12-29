@@ -14,7 +14,16 @@ export class CsvTableComponent {
 
   @Input() public data? : any[any[string]];
 
-  constructor(public fileService : FileService) {
-  }
+  currentFileName : string = '';
 
+  constructor(public fileService : FileService) {
+    fileService.getParseCsvFileSubject().subscribe({
+      next: (data) => {
+        data.subscribe(data => {
+          this.data = data
+          this.currentFileName = fileService.getFile()?.name || '';
+        });
+      }
+    })
+  }
 }
