@@ -3,9 +3,15 @@
 
     <label class="login-form__label" for="login">Login</label>
     <input class="login-form__input" type="text" formControlName="login">
+    @if(loginForm.controls["login"].invalid && loginForm.controls["login"].touched){
+        <div class="login-form__error">Не указан логин</div>
+    }
 
     <label class="login-form__label" for="password">Password</label>
     <input class="login-form__input" type="password" formControlName="password">
+    @if(loginForm.controls["password"].invalid && loginForm.controls["password"].touched){
+        <div class="login-form__error">Не задан пароль или пароль меньше 4 символов</div>
+    }
 
     <button class="button login-form__button" type="submit">Login</button>
 </form>

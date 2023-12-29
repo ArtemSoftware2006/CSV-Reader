@@ -26,7 +26,10 @@ export class LoginFormComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.controls['login'].value)
-    console.log(this.loginForm.controls['password'].value)
+    if(this.loginForm.valid){
+      console.log(this.loginForm.controls['login'].value);
+      console.log(this.loginForm.controls['password'].value);
+    }
+    console.log("Form Invalid");
   }
 }
