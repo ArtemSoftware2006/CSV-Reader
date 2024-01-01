@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AutherizationService } from './services/autherization/autherization.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'CSV Reader';
+  isLogging = false;
+
+  constructor(private authService : AutherizationService) {
+    
+  }
+  ngOnInit(): void {
+    this.isLogging = this.authService.isLogging();
+  }
 }
