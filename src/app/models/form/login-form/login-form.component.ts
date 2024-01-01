@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextInputComponent } from '../../input/text-input/text-input.component';
+import { AutherizationService } from '../../../services/autherization/autherization.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +14,7 @@ import { TextInputComponent } from '../../input/text-input/text-input.component'
 export class LoginFormComponent {
   loginForm : FormGroup;
 
-  constructor() {
+  constructor(public authService : AutherizationService) {
     this.loginForm = new FormGroup({
       login : new FormControl('', [
         Validators.required,
@@ -27,9 +28,10 @@ export class LoginFormComponent {
 
   onSubmit() {
     if(this.loginForm.valid){
-      console.log(this.loginForm.controls['login'].value);
-      console.log(this.loginForm.controls['password'].value);
+      this.authService.login(this.loginForm.controls["login"].value, this.loginForm.controls["password"].value);
     }
-    console.log("Form Invalid");
+    else{
+      console.log("Form Invalid");
+    }
   }
 }

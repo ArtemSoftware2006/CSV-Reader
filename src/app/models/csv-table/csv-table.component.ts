@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { CsvParser} from 'csv-parser';
 import { FileService } from '../../services/file.service';
 import { NgFor } from '@angular/common';
 

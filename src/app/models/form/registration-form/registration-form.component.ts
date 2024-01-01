@@ -1,5 +1,6 @@
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { AutherizationService } from '../../../services/autherization/autherization.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -11,7 +12,7 @@ import { Component } from '@angular/core';
 export class RegistrationFormComponent {
   registrationForm : FormGroup
 
-  constructor() {
+  constructor(public authService : AutherizationService) {
     this.registrationForm = new FormGroup({
       login : new FormControl('', [
         Validators.required,
@@ -39,6 +40,10 @@ export class RegistrationFormComponent {
   }
 
   onSubmit() {
-    throw new Error('Method not implemented.');
+    if (this.registrationForm.valid) {
+      this.authService.registration(this.registrationForm.controls["login"].value, 
+                          this.registrationForm.controls["password"].value, 
+                          this.registrationForm.controls["passwordConfirm"].value);
+    }
   }
 }
