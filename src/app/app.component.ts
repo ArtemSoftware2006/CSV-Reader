@@ -18,6 +18,10 @@ export class AppComponent {
     
   }
   ngOnInit(): void {
-    this.isLogging = this.authService.isLogging();
+    this.authService.isLogging().subscribe({
+      next: (isLogged) => {
+        this.isLogging = isLogged;
+      }
+    });
   }
 }

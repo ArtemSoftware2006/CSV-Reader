@@ -1,6 +1,7 @@
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { AutherizationService } from '../../../services/autherization/autherization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-form',
@@ -12,7 +13,8 @@ import { AutherizationService } from '../../../services/autherization/autherizat
 export class RegistrationFormComponent {
   registrationForm : FormGroup
 
-  constructor(public authService : AutherizationService) {
+  constructor(public authService : AutherizationService,
+    public router : Router) {
     this.registrationForm = new FormGroup({
       login : new FormControl('', [
         Validators.required,
@@ -43,7 +45,16 @@ export class RegistrationFormComponent {
     if (this.registrationForm.valid) {
       this.authService.registration(this.registrationForm.controls["login"].value, 
                           this.registrationForm.controls["password"].value, 
-                          this.registrationForm.controls["passwordConfirm"].value);
+                          this.registrationForm.controls["passwordConfirm"].value)
+      .then(result => {
+        if (result) {
+          this.router.navigate(['/csv-panel']);
+        }
+        else {
+          alert("Wrong login or password");
+        }
+      })
+      .catch(err => alert(err));
     }
   }
 }

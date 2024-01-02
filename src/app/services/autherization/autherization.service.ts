@@ -1,8 +1,9 @@
+import { IToken } from './../../entity/token';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IToken } from '../../entity/token';
 import { IUser } from '../../entity/user';
 import { JwtDecoderService } from '../jwtDecoder/jwt-decoder.service';
+import { Subject, catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,27 +11,59 @@ import { JwtDecoderService } from '../jwtDecoder/jwt-decoder.service';
 export class AutherizationService {
 
   private readonly BASE_URL = 'http://localhost:5149/api'; 
-  private isLogged = false;
+  private isLogged : Subject<boolean> = new Subject<boolean>();
   private user? : IUser;
   constructor(private httpClient : HttpClient,
     private jwtDecoder : JwtDecoderService) { 
   }
 
   public login(email : string, password : string) {
-    this.httpClient.post<IToken>(
-      this.BASE_URL + '/Authorization/Login', 
-      {email, password}
-    ).subscribe((authResult : IToken) => {
-      this.setSession(authResult);
-    })
+    return new Promise<boolean>((resolve, reject) => {
+      this.httpClient.post<IToken>(
+        this.BASE_URL + '/Authorization/Login',
+        { email, password }
+      ).pipe(
+        catchError(err => {
+          console.log(err);
+          if (err.status === 403) {
+            resolve(false); // возвращает false в случае ошибки 403
+          }
+          return throwError(err);
+        }),
+        map((authResult: IToken) => {
+          this.setSession(authResult);
+          return true; // возвращает true в случае успешной авторизации
+        })
+      ).subscribe((result) => {
+        resolve(result);
+      }, (error) => {
+        reject(error);
+      });
+    });
   } 
   public registration(email : string, password : string, passwordConfirm : string) {
-    this.httpClient.post<IToken>(
-      this.BASE_URL + '/Authorization/Registration',
-      {email, password, passwordConfirm}
-    ).subscribe((authResult : IToken) => {
-      this.setSession(authResult);
-    });
+    return new Promise<boolean>((resolve, reject) => {
+      this.httpClient.post<IToken>(
+        this.BASE_URL + '/Authorization/Registration',
+        {email, password, passwordConfirm}
+      ).pipe(
+        catchError(err => {
+          console.log(err);
+          if (err.status === 403) {
+            resolve(false); // возвращает false в случае ошибки 403
+          }
+          return throwError(err);
+        }),
+        map((authResult: IToken) => {
+          this.setSession(authResult);
+          return true; // возвращает true в случае успешной авторизации
+        })
+      ).subscribe((result) => {
+        resolve(result);
+      }, (error) => {
+        reject(error);
+      });
+    }); 
   } 
 
   public getUser() : IUser | undefined {
@@ -42,13 +75,13 @@ export class AutherizationService {
   }
 
   public logout() {
-    this.isLogged = false;
+    this.isLogged.next(false);
     localStorage.removeItem('token');
   }
 
   private setSession(authResult : IToken) {
     console.log(authResult.token);
-    this.isLogged = true;
+    this.isLogged.next(true);
     localStorage.setItem("token", authResult.token);
 
     const tokenDecoded = this.jwtDecoder.parseToken(authResult.token);
