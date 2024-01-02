@@ -1,3 +1,9 @@
+@if (fileSaved) {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success:</strong> File saved!
+    </div>
+}
+
 <nav class="csv-panel__nav">
     <span class="csv-panel__title">CSV Panel</span>
 
@@ -5,6 +11,12 @@
         <label for="file">Загрузить файл</label>
         <input class="csv-panel__file" id="file" type="file" (change)="onFileSelected($event)"/>
     </div>
+    <button class="button csv-panel__nav-item" (click)="onSave()">
+        Сохранить
+    </button>
+    <button class="button csv-panel__nav-item">
+        <a routerLink="/all-files">Файлы</a>
+    </button>
 </nav>
 
 <main class="csv-panel__content">

@@ -12,10 +12,15 @@
     }
 
     &__nav-item {
+        cursor: pointer;
         font-size: $nav-text;
         padding: 5px 10px;
         border-radius: 4px;
         background-color: $color-secondary;
+
+        & > * {
+            cursor: pointer;
+        }
     }
     
     &__file {
