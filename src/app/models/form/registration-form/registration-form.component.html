@@ -19,5 +19,5 @@
         <div class="registration-form__error">Пароли не совпадают</div>
     }
 
-    <button class="button registration-form__button" type="submit">Registration</button>
+    <button [disabled]="registrationForm.invalid" class="button registration-form__button" type="submit">Registration</button>
 </form>

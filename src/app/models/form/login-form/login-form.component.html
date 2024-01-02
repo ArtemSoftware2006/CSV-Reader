@@ -13,5 +13,5 @@
         <div class="login-form__error">Не задан пароль или пароль меньше 4 символов</div>
     }
 
-    <button class="button login-form__button" type="submit">Login</button>
+    <button [disabled]="loginForm.invalid" class="button login-form__button" type="submit">Login</button>
 </form>
