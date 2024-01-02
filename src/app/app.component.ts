@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AutherizationService } from './services/autherization/autherization.service';
+import { IUser } from './entity/user';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { AutherizationService } from './services/autherization/autherization.ser
 export class AppComponent {
   title = 'CSV Reader';
   isLogging = false;
+  user? : IUser;
 
   constructor(private authService : AutherizationService) {
     
@@ -23,5 +25,10 @@ export class AppComponent {
         this.isLogging = isLogged;
       }
     });
+    this.authService.getUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      }
+    })
   }
 }

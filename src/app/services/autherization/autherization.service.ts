@@ -12,7 +12,7 @@ export class AutherizationService {
 
   private readonly BASE_URL = 'http://localhost:5149/api'; 
   private isLogged : Subject<boolean> = new Subject<boolean>();
-  private user? : IUser;
+  private user : Subject<IUser> = new Subject<IUser>();
   constructor(private httpClient : HttpClient,
     private jwtDecoder : JwtDecoderService) { 
   }
@@ -66,7 +66,7 @@ export class AutherizationService {
     }); 
   } 
 
-  public getUser() : IUser | undefined {
+  public getUser() {
     return this.user;
   }
 
@@ -86,11 +86,11 @@ export class AutherizationService {
 
     const tokenDecoded = this.jwtDecoder.parseToken(authResult.token);
 
-    this.user = {
+    this.user.next({
       id: tokenDecoded?.userId,
       name: tokenDecoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
       role: tokenDecoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-    };
+    });
 
     console.log(this.user);
   }

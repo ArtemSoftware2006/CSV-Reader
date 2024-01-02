@@ -2,8 +2,15 @@
   <nav class="app__nav">
     <h1>CSV Reader</h1>
     <div class="app__nav-list nav_main">
-      <a class="app__nav-item" routerLink="/login">Entrance</a>
-      <a class="app__nav-item" routerLink="/csv-panel">Csv panel</a>
+      @if (!isLogging) {
+        <a class="app__nav-item" routerLink="/login">Entrance</a>
+      }
+      @else {
+        <a class="app__nav-item" routerLink="/csv-panel">Csv panel</a>
+        <div class="app__nav-right-panel">
+          Hello, {{user?.name}}
+        </div>
+      }
     </div>
   </nav>
 
