@@ -1,0 +1,16 @@
+@import "../../../shared/variables.scss";
+
+.file-item {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid $color-primary;
+    border-radius: 8px;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 10px $color-primary;
+    }
+}

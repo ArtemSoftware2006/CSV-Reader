@@ -31,7 +31,7 @@ export class CsvPanelPageComponent {
     
       reader.readAsText(selectedFile);  
 
-      this.fileService.setFile(selectedFile);
+      this.fileService.setCurrentFile(selectedFile);
       this.fileService.getCsvAsArray()
       .subscribe({
         next: (data) => {
@@ -46,7 +46,7 @@ export class CsvPanelPageComponent {
     }
   }
   public onSave() {
-    this.fileService.saveFile(this.fileService.getFile())
+    this.fileService.saveFile(this.fileService.getCurrentFile())
     .then((result) => {
       if (result) {
         this.fileSaved = true; 
