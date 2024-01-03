@@ -16,11 +16,22 @@ export class CsvTableComponent {
   currentFileName : string = '';
 
   constructor(public fileService : FileService) {
-    fileService.getParseCsvFileSubject().subscribe({
+    // fileService.getParseCsvFileSubject().subscribe({
+    //   next: (data) => {
+    //     data.subscribe(data => {
+    //       this.data = data
+    //       this.currentFileName = fileService.getCurrentFile()?.name || '';
+    //     });
+    //   }
+    // })
+  }
+
+  ngOnInit(): void {
+    this.fileService.getParseCsvFileSubject().subscribe({
       next: (data) => {
         data.subscribe(data => {
           this.data = data
-          this.currentFileName = fileService.getFile()?.name || '';
+          this.currentFileName = this.fileService.getCurrentFile()?.name || '';
         });
       }
     })

@@ -1,7 +1,7 @@
 <label>{{label}}</label>
 <input 
-    type="text" 
-    id="{{id}}" 
-    formControlName="{{formControlName}}"
-    placeholder="{{placeholder}}"
+    [type]="type" 
+    [id]="id" 
+    [placeholder]="placeholder"
+    (change)="onChange($event.target?.value)"
 >

@@ -1,25 +1,40 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [],
+  providers : [{
+    provide:  NG_VALUE_ACCESSOR,
+    useExisting: TextInputComponent,
+    multi: true
+  }],
   templateUrl: './text-input.component.html',
   styleUrl: './text-input.component.scss'
 })
-export class TextInputComponent {
-  @Input() label: string;
-  @Input() id: string;
-  @Input() placeholder: string;
-  @Input() formControl: FormControl;
-  @Input() formControlName: string;
+export class TextInputComponent implements ControlValueAccessor{
+  @Input() label!: string;
+  @Input() id!: string;
+  @Input() placeholder!: string;
+  @Input() type = 'text';
+  value! : string;
 
   constructor() {
-   this.label="";
-   this.id="";
-   this.formControl=new FormControl();
-   this.placeholder="";
-   this.formControlName="";
+  }
+  onChange(_value? : string) {
+    
+  }
+  writeValue(value: string): void {
+    this.value = value;
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn; 
+  }
+  registerOnTouched(fn: any): void {
+    throw new Error('Method not implemented.');
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    throw new Error('Method not implemented.');
   }
 }
